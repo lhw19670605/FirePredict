@@ -1,2 +1,2 @@
 # FirePredict
-The project of final
+The predict of wild fire
