@@ -920,18 +920,18 @@ image_dir = "down_no"
 
 #----------------------------
 #df = pd.read_csv("/Users/hengwangli/MasterCourse/2023spring/Project/image/fireRecords1.csv",header=0)
-for i in range(df.shape[0]):
-    #print("i=",i)
-    img_size=(600,600)
-    lat = df.at[i,"Lantitude"]
-    long = df.at[i,"Longitude"]
-    latR = df.at[i,"LanRange"]
-    longR = df.at[i,"LongRange"]
-    Start_Date = df.at[i,"CutBegin"]
-    End_Date = df.at[i,"CutEnd"]
-    days =FT.get_dates_days(Start_Date,End_Date)
-    topLeft, bottomRight = FT.get_topLeft_bottomRight(lat,long,latR,longR)
-    image_dir = "/Users/hengwangli/MasterCourse/2023spring/Project/origin_image2"
+#for i in range(df.shape[0]):
+#    #print("i=",i)
+#    img_size=(600,600)
+#    lat = df.at[i,"Lantitude"]
+#    long = df.at[i,"Longitude"]
+#    latR = df.at[i,"LanRange"]
+#    longR = df.at[i,"LongRange"]
+#    Start_Date = df.at[i,"CutBegin"]
+#    End_Date = df.at[i,"CutEnd"]
+#    days =FT.get_dates_days(Start_Date,End_Date)
+#    topLeft, bottomRight = FT.get_topLeft_bottomRight(lat,long,latR,longR)
+#    image_dir = "/Users/hengwangli/MasterCourse/2023spring/Project/origin_image2"
     #if i<3:
     #    print(End_Date)
     #    print(days)
@@ -954,18 +954,18 @@ topLeft, bottomRight = FT.get_topLeft_bottomRight(lat,long,latR,longR)
 #-----------------------------------------
 #補充一些非火災照片，平衡數量
 #df = pd.read_csv("/Users/hengwangli/MasterCourse/2023spring/Project/image/fireRecords.csv",header=0)
-for i in range(df.shape[0]):
-    #print("i=",i)
-    img_size=(600,600)
-    lat = df.at[i,"lat"]
-    long = df.at[i,"long"]
-    latR = df.at[i,"latR"]
-    longR = df.at[i,"longR"]
-    Start_Date = df.at[i,"cutB"]
-    End_Date = df.at[i,"cutE"]
-    days =FT.get_dates_days(Start_Date,End_Date)
-    topLeft, bottomRight = FT.get_topLeft_bottomRight(lat,long,latR,longR)
-    image_dir = "/Users/hengwangli/MasterCourse/2023spring/Project/origin_image2"
+#for i in range(df.shape[0]):
+#    #print("i=",i)
+#    img_size=(600,600)
+#    lat = df.at[i,"lat"]
+#    long = df.at[i,"long"]
+#    latR = df.at[i,"latR"]
+#    longR = df.at[i,"longR"]
+#    Start_Date = df.at[i,"cutB"]
+#    End_Date = df.at[i,"cutE"]
+#    days =FT.get_dates_days(Start_Date,End_Date)
+#    topLeft, bottomRight = FT.get_topLeft_bottomRight(lat,long,latR,longR)
+#    image_dir = "/Users/hengwangli/MasterCourse/2023spring/Project/origin_image2"
     #if i<3:
     #    print(End_Date)
     #    print(days)
