@@ -919,7 +919,7 @@ image_dir = "down_no"
 #FT.download_NASA_image_nums(start_date, end_date, img_size, image_dir, nums, latitud_longitude_edge(0))
 
 #----------------------------
-df = pd.read_csv("/Users/hengwangli/MasterCourse/2023spring/Project/image/fireRecords1.csv",header=0)
+#df = pd.read_csv("/Users/hengwangli/MasterCourse/2023spring/Project/image/fireRecords1.csv",header=0)
 for i in range(df.shape[0]):
     #print("i=",i)
     img_size=(600,600)
@@ -953,7 +953,7 @@ topLeft, bottomRight = FT.get_topLeft_bottomRight(lat,long,latR,longR)
 
 #-----------------------------------------
 #補充一些非火災照片，平衡數量
-df = pd.read_csv("/Users/hengwangli/MasterCourse/2023spring/Project/image/fireRecords.csv",header=0)
+#df = pd.read_csv("/Users/hengwangli/MasterCourse/2023spring/Project/image/fireRecords.csv",header=0)
 for i in range(df.shape[0]):
     #print("i=",i)
     img_size=(600,600)
