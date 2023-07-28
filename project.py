@@ -15,6 +15,10 @@ import cv2
 import numpy as np
 import zipfile
 import time
+import requests
+import gdown
+import torch
+
 #from streamlit_imagegrid import streamlit_imagegrid
 
 # set wide screen, but it is not beauty to look
@@ -24,7 +28,7 @@ import time
 #st.sidebar.header('Monitoring Area Parameters')
 
 # part1: Load Model
-model_file = st.sidebar.file_uploader('Select model file', type=['pkl'])
+#model_file = st.sidebar.file_uploader('Select model file', type=['pkl'])
 
 # part2: Visual styles: Scan Model and Monitor Model
 col1, col2 = st.sidebar.columns(2)
@@ -103,15 +107,73 @@ def fire_instances():
 #
 # ---------------------------------------------------------------------
 
+def download_file_from_google_drive(file_id, destination):
+    URL = "https://drive.google.com/uc?export=download&id=" + file_id
+
+    session = requests.Session()
+
+    response = session.get(URL, stream=True)
+    token = get_confirm_token(response)
+
+    if token:
+        params = {'confirm': token}
+        response = session.get(URL, params=params, stream=True)
+
+    save_response_content(response, destination)    
+
+def get_confirm_token(response):
+    for key, value in response.cookies.items():
+        if key.startswith('download_warning'):
+            return value
+
+    return None
+
+def save_response_content(response, destination):
+    CHUNK_SIZE = 32768
+
+    with open(destination, "wb") as f:
+        for chunk in response.iter_content(CHUNK_SIZE):
+            if chunk: # filter out keep-alive new chunks
+                f.write(chunk)
+
+# 调用示例
+#file_id = "https://drive.google.com/file/d/1JCt52PLLJncFk-N7OO0h0sOThuDr31OK/view?usp=sharing"
+#model_file = "model.pkl"  # 保存文件的本地路径
+#download_file_from_google_drive(file_id, model_file)
+
+@st.cache_data
+def down_modelfile(url):
+    # 提取文件的 ID
+    file_id = url.split('/')[-2]
+
+    # 下载文件并保存为 model.pkl
+    gdown.download(f'https://drive.google.com/uc?id={file_id}', 'model.pkl', quiet=False)
+    return 'model.pkl'
+
+# 共享链接
+model_file_url = 'https://drive.google.com/file/d/1JCt52PLLJncFk-N7OO0h0sOThuDr31OK/view?usp=sharing'
+model_file = down_modelfile(model_file_url)
+
+# 加载模型
+#learn_inf = load_learner('model.pkl')
 
 # 假设你有一个名为"example.zip"的ZIP文件，它包含要解压的文件
 #zip_file_path = "Archive 2.zip"
 
 # 解压ZIP文件
-with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
-    zip_ref.extractall("resourse")
-model_file = "resourse/modelAll.pkl"
-wave_file ="resourse/distant-ambulance-siren-6108.mp3"
+#with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
+#    zip_ref.extractall("resourse")
+#model_file = "resourse/modelAll.pkl"
+#wave_file ="resourse/distant-ambulance-siren-6108.mp3"
+#model_url = "https://drive.google.com/file/d/1JCt52PLLJncFk-N7OO0h0sOThuDr31OK/view?usp=sharing"
+# 下载预训练模型文件
+#response = requests.get(model_url, stream=True)
+#st.write(response)
+# 将数据加载到io.BytesIO缓冲区
+#model_file = io.BytesIO(response.raw.read())
+
+#model_file = "/Users/hengwangli/MasterCourse/2023spring/Project/modelAll.pkl"
+
 
 
 #--------------------------------------------------------------------------

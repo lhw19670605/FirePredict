@@ -8,7 +8,6 @@ import numpy as np
 import pandas as pd
 import urllib.request
 import datetime
-import urllib.request
 import torchvision
 import IPython
 #from IPython.display import Image
