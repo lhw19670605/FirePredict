@@ -105,7 +105,7 @@ def fire_instances():
 
 
 # 假设你有一个名为"example.zip"的ZIP文件，它包含要解压的文件
-zip_file_path = "Archive 2.zip"
+#zip_file_path = "Archive 2.zip"
 
 # 解压ZIP文件
 with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
