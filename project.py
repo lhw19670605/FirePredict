@@ -152,8 +152,12 @@ def down_modelfile(url):
     return 'model.pkl'
 
 # 共享链接
-model_file_url = 'https://drive.google.com/file/d/1JCt52PLLJncFk-N7OO0h0sOThuDr31OK/view?usp=sharing'
-model_file = down_modelfile(model_file_url)
+#model_file_url = 'https://drive.google.com/file/d/1JCt52PLLJncFk-N7OO0h0sOThuDr31OK/view?usp=sharing'
+#model_file = down_modelfile(model_file_url)
+model_whole_url = 'https://drive.google.com/file/d/1JL_-oipr1RssD5Oiwndcs1jedRF0I8FB/view?usp=sharing'
+model_grid_url = 'https://drive.google.com/file/d/1fALyamcJBVofYyNuCxch1bKZGCovxBND/view?usp=sharing'
+model_whole = down_modelfile(model_whole_url)
+model_grid = down_modelfile(model_grid_url)
 
 
 #--------------------------------------------------------------------------
@@ -285,7 +289,12 @@ if st.button('Test'):
     #st.header('Test')
 
     # Check if a file has been selected
-    if model_file is not None:
+    if model_whole is not None:
+        if ScanM==0:
+            model_file = model_whole
+        else:
+            model_file = model_grid
+            
         learn_inf = load_learner(model_file)
         FT = Fire_Tools.Fire_Tools()
         #st.write(learn_inf)
