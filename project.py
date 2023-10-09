@@ -19,6 +19,8 @@ import requests
 import gdown
 import torch
 
+
+
 #from streamlit_imagegrid import streamlit_imagegrid
 
 # set wide screen, but it is not beauty to look
@@ -157,6 +159,20 @@ model_file = down_modelfile(model_file_url)
 # 加载模型
 #learn_inf = load_learner('model.pkl')
 
+def get_confirm_token(response):
+    for key, value in response.cookies.items():
+        if key.startswith('download_warning'):
+            return value
+
+    return None
+
+def save_response_content(response, destination):
+    CHUNK_SIZE = 32768
+
+    with open(destination, "wb") as f:
+        for chunk in response.iter_content(CHUNK_SIZE):
+            if chunk: # filter out keep-alive new chunks
+                f.write(chunk)
 # 假设你有一个名为"example.zip"的ZIP文件，它包含要解压的文件
 #zip_file_path = "Archive 2.zip"
 
@@ -165,6 +181,7 @@ model_file = down_modelfile(model_file_url)
 #    zip_ref.extractall("resourse")
 #model_file = "resourse/modelAll.pkl"
 #wave_file ="resourse/distant-ambulance-siren-6108.mp3"
+
 #model_url = "https://drive.google.com/file/d/1JCt52PLLJncFk-N7OO0h0sOThuDr31OK/view?usp=sharing"
 # 下载预训练模型文件
 #response = requests.get(model_url, stream=True)
@@ -174,6 +191,23 @@ model_file = down_modelfile(model_file_url)
 
 #model_file = "/Users/hengwangli/MasterCourse/2023spring/Project/modelAll.pkl"
 
+
+@st.cache_data
+def down_modelfile(url):
+    # 提取文件的 ID
+    file_id = url.split('/')[-2]
+
+    # 下载文件并保存为 model.pkl
+    gdown.download(f'https://drive.google.com/uc?id={file_id}', 'model.pkl', quiet=False)
+    return 'model.pkl'
+
+# 共享链接
+#model_file_url = 'https://drive.google.com/file/d/1JCt52PLLJncFk-N7OO0h0sOThuDr31OK/view?usp=sharing'
+#model_file = down_modelfile(model_file_url)
+model_whole_url = 'https://drive.google.com/file/d/1JL_-oipr1RssD5Oiwndcs1jedRF0I8FB/view?usp=sharing'
+model_grid_url = 'https://drive.google.com/file/d/1fALyamcJBVofYyNuCxch1bKZGCovxBND/view?usp=sharing'
+model_whole = down_modelfile(model_whole_url)
+model_grid = down_modelfile(model_grid_url)
 
 
 #--------------------------------------------------------------------------
@@ -305,7 +339,12 @@ if st.button('Test'):
     #st.header('Test')
 
     # Check if a file has been selected
-    if model_file is not None:
+    if model_whole is not None:
+        if ScanM==0:
+            model_file = model_whole
+        else:
+            model_file = model_grid
+            
         learn_inf = load_learner(model_file)
         FT = Fire_Tools.Fire_Tools()
         #st.write(learn_inf)
