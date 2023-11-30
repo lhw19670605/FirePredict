@@ -59,18 +59,18 @@ else:
     MonitorM=1
 
 if MonitorM==0:
-    db = col1.date_input('Begin Date', datetime.date(2023, 2, 18))
+    db = col1.date_input('Begin Date', datetime.date(2022, 7, 2))
 else:
     col1, col2 = st.sidebar.columns(2)
-    db = col1.date_input('Begin Date', datetime.date(2023, 2, 2))
-    de = col2.date_input('End Date', datetime.date(2023, 2, 10))
+    db = col1.date_input('Begin Date', datetime.date(2022, 6, 27))
+    de = col2.date_input('End Date', datetime.date(2022, 6, 30))
     
 
 
-latitude = st.sidebar.slider('latitude of center',-90,90,-36,)
-longitude = st.sidebar.slider('longitude of center',-180,180,-70)
+latitude = st.sidebar.slider('latitude of center',-90,90,-16,)
+longitude = st.sidebar.slider('longitude of center',-180,180,-64)
 width = st.sidebar.slider('width of region', 2, 10, 6, 2)
-height = st.sidebar.slider('height of region', 2, 10, 4, 2)
+height = st.sidebar.slider('height of region', 2, 10, 6, 2)
     
 
 data = { 'latitude' : latitude,
