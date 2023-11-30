@@ -35,14 +35,14 @@ import torch
 # part2: Visual styles: Scan Model and Monitor Model
 col1, col2 = st.sidebar.columns(2)
 
-ScanModel = ('Whole', 'Gride')
+ScanModel = ('Non-Grid', 'Gride')
 MonitorModel = ('Single', 'Range')
 # Defining Radio Button with index value
 scan = col1.radio(
     "Scan Model",
     ScanModel,
     index = 0)
-if scan == 'Whole':
+if scan == 'Non-Grid':
     ScanM=0
 else:
     ScanM=1
@@ -353,6 +353,7 @@ if st.button('Test'):
         if ScanM==0 and MonitorM==0:
             empty1 = st.empty()
             empty2 = st.empty()
+            st.write(latitude, longitude, height, width, db)
             aa = draw_single_image(latitude, longitude, height, width, db)
             #if aa=="Smoke":
             #    st.write("# Auto-playing Audio!")
