@@ -220,7 +220,7 @@ def draw_single_image(latitude, longitude, height,width, db):
     size=[224,224]
             
     topLeft, bottomRight = FT.get_topLeft_bottomRight(center[0],center[1],height,width)
-    st.write(topLeft, bottomRight, dateb, size)
+    #st.write(topLeft, bottomRight, dateb, size)
     img = FT.download_NASA_img(topLeft, bottomRight, dateb, size)
     
     image_size = (400, 400)
@@ -354,7 +354,7 @@ if st.button('Test'):
         if ScanM==0 and MonitorM==0:
             empty1 = st.empty()
             empty2 = st.empty()
-            st.write(latitude, longitude, height, width, db)
+            #st.write(latitude, longitude, height, width, db)
             aa = draw_single_image(latitude, longitude, height, width, db)
             #if aa=="Smoke":
             #    st.write("# Auto-playing Audio!")
