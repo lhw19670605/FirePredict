@@ -70,7 +70,7 @@ else:
 latitude = st.sidebar.slider('latitude of center',-90,90,-16,)
 longitude = st.sidebar.slider('longitude of center',-180,180,-64)
 width = st.sidebar.slider('width of region', 2, 10, 6, 2)
-height = st.sidebar.slider('height of region', 2, 10, 6, 2)
+height = st.sidebar.slider('height of region', 2, 10, 4, 2)
     
 
 data = { 'latitude' : latitude,
